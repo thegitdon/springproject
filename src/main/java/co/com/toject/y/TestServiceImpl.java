@@ -1,7 +1,7 @@
 package co.com.toject.y;
 
-import co.com.toject.x.ITestRepo;
-import co.com.toject.x.TestRepoImpl;
+import co.com.toject.repository.ITestRepo;
+import co.com.toject.repository.TestRepoImpl;
 
 //@Service
 public class TestServiceImpl implements ITestService {

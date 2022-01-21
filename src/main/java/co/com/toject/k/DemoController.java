@@ -1,4 +1,4 @@
-package co.com.toject.controller;
+package co.com.toject.k;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.com.toject.model.PTest;
-import co.com.toject.x.IPTestRepo;
+import co.com.toject.repository.PTestRepository;
 
 @Controller // redireccionar la petición hacia alguna lógica de negocio
 public class DemoController {
 
 	@Autowired
-	private IPTestRepo iPTest;
+	private PTestRepository iPTest;
 
 	@GetMapping("/greeting") // ?name=Ronald
 	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
@@ -40,3 +40,6 @@ public class DemoController {
 //https://spring.io/projects/spring-data-jpa
 
 //https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdocs.spring.io%2Fspring%2Fdocs%2F5.0.0.RC3%2Fspring-framework-reference%2Fimages%2Fspring-overview.png&f=1&nofb=1
+
+//https://www.javaguides.net/2019/08/spring-boot-spring-data-jpa-postgresql-example.html
+

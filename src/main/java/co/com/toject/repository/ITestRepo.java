@@ -1,4 +1,4 @@
-package co.com.toject.x;
+package co.com.toject.repository;
 
 public interface ITestRepo {
 
