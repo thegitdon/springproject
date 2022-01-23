@@ -23,7 +23,7 @@ public class PTestController {
 	@Autowired
 	private PTestRepository i;
 
-	@GetMapping("/getptest")
+	@GetMapping("/people")
 	public List<PTest> toList() {
 		return i.findAll();
 	}
@@ -35,19 +35,20 @@ public class PTestController {
 	 * id) { PTest pT = i.findById(id) .orElseThrow(); return pT; }
 	 */
 
-	@GetMapping("/getptest/{id}")
-	public ResponseEntity<PTest> byId(@PathVariable("id") Integer id) {
-		PTest pT = i.findById(id).
-				orElseThrow();
+	@GetMapping("/people/{id}")
+	public ResponseEntity<PTest> getById(@PathVariable("id") Integer id) {
+		PTest pT = i.findById(id)
+				.orElseThrow();
 		return ResponseEntity.ok().body(pT);
 	}
 
-	@PostMapping
+	@PostMapping("/people")
 	public PTest toIns(@RequestBody PTest p) { // JSON to Object
 		return i.save(p); // si no existe, inserta
 
 	}
 
+	// updateEntity v1
 	/*
 	 * @PutMapping public void toUpd(@RequestBody PTest p) { // JSON to Object
 	 * i.save(p); // if existe, modifica
@@ -55,7 +56,7 @@ public class PTestController {
 	 * }
 	 */
 
-	@PutMapping("/getptest/{id}")
+	@PutMapping("/people/{id}")
 	public ResponseEntity<PTest> toUpd(@PathVariable("id") Integer id, @RequestBody PTest p) { // JSON to Object
 
 		PTest pT = i.findById(id)
@@ -69,9 +70,19 @@ public class PTestController {
 
 	}
 
-	@DeleteMapping(value = "/{id}")
+	// delById v1
+	/*
+	 * @DeleteMapping(value = "/{id}") public void toDel(@PathVariable("id") Integer
+	 * id) { // i.deleteById(id);
+	 * 
+	 * }
+	 */
+	@DeleteMapping("/people/{id}")
 	public void toDel(@PathVariable("id") Integer id) { //
-		i.deleteById(id);
+		PTest pT = i.findById(id)
+				.orElseThrow();
+		i.delete(pT);
 
 	}
+
 }
