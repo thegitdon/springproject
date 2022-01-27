@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.toject.model.PTest;
@@ -23,11 +24,31 @@ public class PTestController {
 	@Autowired
 	private PTestRepository i;
 
-	@GetMapping("/people")
-	public List<PTest> toList() {
-		return i.findAll();
-	}
+	/*
+	 * @GetMapping("/people") public List<PTest> toList() { return i.findAll(); }
+	 */
+	/*
+	 * @GetMapping("/people") public ResponseEntity<List<PTest>>
+	 * toList(@RequestParam(required = false) String n) {
+	 * 
+	 * List<PTest> pT; if (n == null) pT = i.findAll(); else pT =
+	 * i.findByEmailContaining(n);
+	 * 
+	 * return ResponseEntity.ok().body(pT); }
+	 */
 
+	@GetMapping("/people")
+	public List<PTest> toList(@RequestParam(required = false) String email) { // people?email=n
+
+		// List<PTest> pT;
+
+		if (email == null)
+			return i.findAll();
+		else
+			return i.findByEmailContaining(email);
+
+		// return pT;
+	}
 	// byId v1
 
 	/*
@@ -40,6 +61,12 @@ public class PTestController {
 		PTest pT = i.findById(id)
 				.orElseThrow();
 		return ResponseEntity.ok().body(pT);
+	}
+
+	@GetMapping("/people/published")
+	public List<PTest> findByPublished() {
+
+		return i.findByPublished(true);
 	}
 
 	@PostMapping("/people")

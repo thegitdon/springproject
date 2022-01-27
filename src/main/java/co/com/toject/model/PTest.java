@@ -15,6 +15,16 @@ public class PTest {
 	private String name;
 	@Column
 	private String email;
+	@Column
+	private boolean published;
+
+	public boolean isPublished() {
+		return published;
+	}
+
+	public void setPublished(boolean published) {
+		this.published = published;
+	}
 
 	public int getId() {
 		return id;
